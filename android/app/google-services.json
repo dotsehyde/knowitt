@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712761504148",
+    "project_id": "knowittapp",
+    "storage_bucket": "knowittapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712761504148:android:63524cba115d6ea19ddf81",
+        "android_client_info": {
+          "package_name": "com.dotsehyde.knowitt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712761504148-6nu0tbt0k9k2t33ir36funrp6405bfuk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKNY3I9txdr-J_DySqUXyp3N89eTHTxGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712761504148-6nu0tbt0k9k2t33ir36funrp6405bfuk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>712761504148-pba75ml077tm6s18tj4sga9up3hh1fok.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.712761504148-pba75ml077tm6s18tj4sga9up3hh1fok</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB80wHywEUBtw9ZTZIFOenZsf7E5fAAtB8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>712761504148</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dotsehyde.knowitt</string>
+	<key>PROJECT_ID</key>
+	<string>knowittapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>knowittapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:712761504148:ios:a76a8cf2d11fa9f09ddf81</string>
+</dict>
+</plist>
