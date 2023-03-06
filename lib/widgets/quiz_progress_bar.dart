@@ -8,39 +8,52 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class QuizProgressBar extends ConsumerStatefulWidget {
-  final QuestionModel? question;
-  const QuizProgressBar({this.question, super.key});
+  final QuestionModel question;
+  const QuizProgressBar(this.question, {super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _QuizProgressBarState();
 }
 
-class _QuizProgressBarState extends ConsumerState<QuizProgressBar> {
+class _QuizProgressBarState extends ConsumerState<QuizProgressBar>
+    with SingleTickerProviderStateMixin {
   var time = 0.0;
+  late Animation animation;
+  @override
+  void initState() {
+    final controller = ref.read(gameControllerProvider.notifier);
+    controller.animationController = AnimationController(
+        vsync: this, duration: Duration(seconds: widget.question.duration))
+      ..forward();
+    controller.animation = Tween<double>(begin: 0.0, end: 1.0)
+        .animate(controller.animationController);
+    controller.trackAnimation();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final controller = ref.watch(gameControllerProvider);
+    final controller = ref.watch(gameControllerProvider.notifier);
+
     return Container(
         width: double.infinity,
         height: 5.h,
         decoration: BoxDecoration(
             // border: Border.all(color: darkBlue, width: 1),
             borderRadius: BorderRadius.circular(50)),
-        child: TweenAnimationBuilder<double>(
-            duration: Duration(seconds: 20),
-            tween: Tween(begin: 0.0, end: 1.0),
-            builder: (context, value, child) {
-              time = value * 10;
+        child: AnimatedBuilder(
+            animation: controller.animationController,
+            builder: (context, _) {
+              time = controller.animation.value * widget.question.duration;
               return Stack(
                 children: [
-                  // LayoutBuider provide the available space for the container
-                  // constraints.maxWidth need for animation
                   LayoutBuilder(
                       builder: (context, constraints) => Container(
-                            width: constraints.maxWidth * value,
+                            width: constraints.maxWidth *
+                                controller.animation.value,
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                     colors: [accentColor, primaryColor]),
                                 borderRadius: BorderRadius.circular(50)),
                           )),
@@ -50,14 +63,25 @@ class _QuizProgressBarState extends ConsumerState<QuizProgressBar> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Row(
+                          children: [
+                            const Icon(CupertinoIcons.time),
+                            Text(
+                              "Time",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.sp,
+                                  fontFamily: 'debug'),
+                            ),
+                          ],
+                        ),
                         Text(
-                          "Time",
+                          '${time.toStringAsFixed(0)}/${widget.question.duration}s',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20.sp,
-                              fontFamily: 'debug'),
-                        ),
-                        Icon(CupertinoIcons.time)
+                              fontSize: 15.sp,
+                              fontFamily: 'gunk'),
+                        )
                       ],
                     ).paddingSymmetric(horizontal: 2.w),
                   ))

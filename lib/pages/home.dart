@@ -26,7 +26,6 @@ class _HomePageState extends ConsumerState<HomePage>
   @override
   Widget build(BuildContext context) {
     ref.listen<GameState>(gameControllerProvider, (_, state) {
-      print(state.gameStatus);
       switch (state.gameStatus) {
         case GameStatus.initGame:
           showDialog(
@@ -40,13 +39,14 @@ class _HomePageState extends ConsumerState<HomePage>
               });
           break;
         case GameStatus.gameReady:
-          Navigator.of(context, rootNavigator: true).pop();
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => QuizPage(),
-          //   ),
-          // );
+          Navigator.of(context).pop();
+          showDialog(
+              barrierColor: Colors.white24,
+              context: context,
+              builder: (context) {
+                return const InitMessageBox();
+              });
+
           break;
         default:
       }
@@ -264,6 +264,64 @@ class _HomePageState extends ConsumerState<HomePage>
           ),
         );
       }),
+    );
+  }
+}
+
+class InitMessageBox extends ConsumerWidget {
+  const InitMessageBox({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AlertDialog(
+      backgroundColor: Colors.black,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 20,
+      contentPadding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Are you Ready?",
+            style: TextStyle(fontSize: 25.sp, fontFamily: "gunk"),
+          ).paddingBottom(1.h),
+          Text(
+            "You have 30 seconds to answer each question",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.sp, fontFamily: "pixel"),
+          ).paddingSymmetric(vertical: 1.h),
+          TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: t.primaryColor,
+                  padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50))),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuizPage(),
+                  ),
+                );
+              },
+              child: Text(
+                "Start Quiz",
+                style: TextStyle(
+                    fontSize: 22.sp, fontFamily: "debug", color: Colors.white),
+              )),
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "Hold on!",
+                style: TextStyle(fontSize: 20.sp, fontFamily: "gunk"),
+              )),
+        ],
+      ),
     );
   }
 }
