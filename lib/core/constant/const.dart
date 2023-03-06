@@ -2,6 +2,7 @@ const String appName = "Know Itt";
 const String userCollection = "Users";
 const String questionCollection = "Questions";
 const String categoryCollection = "Categories";
+const String adminCollection = "Admins";
 
 const List<String> initLoadingText = [
   "Visiting the library...",

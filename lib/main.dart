@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:knowitt/admin/pages/auth.dart';
+import 'package:knowitt/admin/pages/welcome.dart';
 import 'package:knowitt/core/constant/theme.dart';
 import 'package:knowitt/firebase_options.dart';
 import 'package:knowitt/pages/auth.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'core/constant/const.dart';
@@ -22,12 +27,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, _, __) {
-      return MaterialApp(
-        title: appName,
-        debugShowCheckedModeBanner: false,
-        theme: customTheme,
-        home: Starter(),
-      );
+      return isWeb
+          ? MaterialApp(
+              title: appName,
+              debugShowCheckedModeBanner: false,
+              theme: customTheme,
+              initialRoute: '/',
+              routes: {
+                '/': (context) => WelcomePage(),
+                '/auth': (context) => AdminAuthPage(),
+              },
+            )
+          : MaterialApp(
+              title: appName,
+              debugShowCheckedModeBanner: false,
+              theme: customTheme,
+              home: Starter(),
+            );
     });
   }
 }
