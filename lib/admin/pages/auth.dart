@@ -60,7 +60,7 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
                   onPressed: () {
                     controller.signIn().then((value) {
                       if (value) {
-                        Navigator.pushNamed(context, "/admin");
+                        Navigator.pushNamed(context, "/dashboard");
                       }
                     }).catchError((e) {
                       print(e);
