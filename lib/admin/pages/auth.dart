@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knowitt/admin/controller/admin_controller.dart';
 import 'package:knowitt/core/constant/theme.dart';
@@ -14,6 +16,17 @@ class AdminAuthPage extends ConsumerStatefulWidget {
 
 class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacementNamed("/dashboard");
+      });
+    }
+    super.initState();
+  }
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +48,14 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
               ).paddingBottom(5.h),
               TextFormField(
                 onChanged: (value) => controller.username = value,
+                validator: (value) {
+                  if (!value.validateEmail()) {
+                    return "Please enter a valid email";
+                  }
+                  return null;
+                },
                 decoration: InputDecoration(
-                    hintText: "Username",
+                    hintText: "Email",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10))),
               ).paddingSymmetric(horizontal: 10.w),
@@ -58,12 +77,20 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
                           fontFamily: "gunk",
                           fontWeight: FontWeight.bold)),
                   onPressed: () {
+                    setState(() {
+                      isLoading = true;
+                    });
                     controller.signIn().then((value) {
                       if (value) {
-                        Navigator.pushNamed(context, "/admin");
+                        setState(() {
+                          isLoading = false;
+                        });
+                        Navigator.pushReplacementNamed(context, "/dashboard");
                       }
                     }).catchError((e) {
-                      print(e);
+                      setState(() {
+                        isLoading = false;
+                      });
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
