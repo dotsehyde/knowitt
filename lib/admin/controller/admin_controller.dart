@@ -14,6 +14,9 @@ class AdminController extends ChangeNotifier {
   AdminStatus status = AdminStatus.initial;
   String password = '';
   String username = '';
+  String selCat = '';
+  List<String> options = [];
+  List<String> listCat = ["Computer Science", "Mathematics", "Physics"];
   final _auth = FirebaseAuth.instance;
   void setStatus(AdminStatus status) {
     status = status;
