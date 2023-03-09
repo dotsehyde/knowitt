@@ -20,7 +20,7 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
   void initState() {
     if (FirebaseAuth.instance.currentUser != null) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).pushNamed("/dashboard");
+        Navigator.of(context).pushReplacementNamed("/dashboard");
       });
     }
     super.initState();
@@ -91,7 +91,6 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
                       setState(() {
                         isLoading = false;
                       });
-                      print(e);
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(

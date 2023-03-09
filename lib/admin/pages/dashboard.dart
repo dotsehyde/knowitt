@@ -19,7 +19,7 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     if (FirebaseAuth.instance.currentUser == null) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).pushNamed("/auth");
+        Navigator.of(context).pushReplacementNamed("/auth");
       });
     }
     super.initState();
@@ -177,12 +177,15 @@ class _DashboardWidgetState extends ConsumerState<DashboardWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Text(
-              //   "Add Category",
-              //   textAlign: TextAlign.center,
-              //   style: TextStyle(color: Colors.black),
-              // ),
+              Text(
+                "Add Category",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black, fontSize: 18.sp),
+              ),
               TextFormField(
+                onChanged: (val) {
+                  controller.categoryName = val;
+                },
                 style: TextStyle(fontSize: 18.sp),
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -198,7 +201,9 @@ class _DashboardWidgetState extends ConsumerState<DashboardWidget> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: primaryColor,
                           minimumSize: Size(double.infinity, 50)),
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.addCategory();
+                      },
                       child: Text("Add Category"))
                   .paddingSymmetric(horizontal: 10.w),
             ],
@@ -212,8 +217,13 @@ class _DashboardWidgetState extends ConsumerState<DashboardWidget> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      "Add Question",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 18.sp),
+                    ),
                     FutureBuilder<List<String>>(
-                        future: Future.value(controller.listCat),
+                        future: controller.getCategories(),
                         builder: (context, snap) {
                           if (snap.hasData) {
                             return DropdownButtonFormField<String>(
