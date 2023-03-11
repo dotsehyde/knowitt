@@ -120,6 +120,7 @@ class GameController extends StateNotifier<GameState> {
       state = state.update(gameStatus: GameStatus.initGame);
       List<QuestionModel> questions = [
         QuestionModel(
+            id: "0",
             question: "Hello Test 0",
             answer: "wow",
             category: "Science",
@@ -129,6 +130,7 @@ class GameController extends StateNotifier<GameState> {
             options: ["wow", "hello", "eii", "saa"],
             createdAt: DateTime.now()),
         QuestionModel(
+            id: "1",
             question: "Hello Test 1",
             answer: "lol",
             category: "Science",
@@ -138,6 +140,7 @@ class GameController extends StateNotifier<GameState> {
             options: ["cool", "lol", "eii", "saa"],
             createdAt: DateTime.now()),
         QuestionModel(
+            id: "2",
             question: "Hello Test 2",
             answer: "wow",
             category: "Science",
@@ -147,6 +150,7 @@ class GameController extends StateNotifier<GameState> {
             options: ["wow", "hello", "eii", "saa"],
             createdAt: DateTime.now()),
         QuestionModel(
+            id: "3",
             question: "Hello Test 3",
             answer: "wow",
             category: "Science",

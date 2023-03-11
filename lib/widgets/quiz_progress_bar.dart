@@ -71,7 +71,7 @@ class _QuizProgressBarState extends ConsumerState<QuizProgressBar>
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20.sp,
-                                  fontFamily: 'debug'),
+                                  fontFamily: 'Debug'),
                             ),
                           ],
                         ),
@@ -80,7 +80,7 @@ class _QuizProgressBarState extends ConsumerState<QuizProgressBar>
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 15.sp,
-                              fontFamily: 'gunk'),
+                              fontFamily: 'Gunk'),
                         )
                       ],
                     ).paddingSymmetric(horizontal: 2.w),

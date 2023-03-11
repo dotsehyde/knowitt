@@ -13,6 +13,7 @@ class QuestionModel {
   final String? image;
   final List<String> options;
   final DateTime createdAt;
+  final String id;
   QuestionModel({
     required this.question,
     required this.answer,
@@ -23,6 +24,7 @@ class QuestionModel {
     this.image,
     required this.options,
     required this.createdAt,
+    required this.id,
   });
 
   QuestionModel copyWith({
@@ -35,6 +37,7 @@ class QuestionModel {
     String? image,
     List<String>? options,
     DateTime? createdAt,
+    String? id,
   }) {
     return QuestionModel(
       question: question ?? this.question,
@@ -46,6 +49,7 @@ class QuestionModel {
       image: image ?? this.image,
       options: options ?? this.options,
       createdAt: createdAt ?? this.createdAt,
+      id: id ?? this.id,
     );
   }
 
@@ -60,10 +64,11 @@ class QuestionModel {
       'image': image,
       'options': options,
       'createdAt': createdAt.millisecondsSinceEpoch,
+      'id': id,
     };
   }
 
-  factory QuestionModel.fromMap(Map<String, dynamic> map) {
+  factory QuestionModel.fromMap(Map map) {
     return QuestionModel(
       question: map['question'] as String,
       answer: map['answer'] as String,
@@ -72,8 +77,9 @@ class QuestionModel {
       points: map['points'] as int,
       wrongPoints: map['wrongPoints'] as int,
       image: map['image'] != null ? map['image'] as String : null,
-      options: List<String>.from(map['options'] as List<String>),
+      options: List<String>.from(map['options'] as List<dynamic>),
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
+      id: map['id'] as String,
     );
   }
 
@@ -84,7 +90,7 @@ class QuestionModel {
 
   @override
   String toString() {
-    return 'QuestionModel(question: $question, answer: $answer, category: $category, duration: $duration, points: $points, wrongPoints: $wrongPoints, image: $image, options: $options, createdAt: $createdAt)';
+    return 'QuestionModel(question: $question, answer: $answer, category: $category, duration: $duration, points: $points, wrongPoints: $wrongPoints, image: $image, options: $options, createdAt: $createdAt, id: $id)';
   }
 
   @override
@@ -99,7 +105,8 @@ class QuestionModel {
         other.wrongPoints == wrongPoints &&
         other.image == image &&
         listEquals(other.options, options) &&
-        other.createdAt == createdAt;
+        other.createdAt == createdAt &&
+        other.id == id;
   }
 
   @override
@@ -112,6 +119,7 @@ class QuestionModel {
         wrongPoints.hashCode ^
         image.hashCode ^
         options.hashCode ^
-        createdAt.hashCode;
+        createdAt.hashCode ^
+        id.hashCode;
   }
 }

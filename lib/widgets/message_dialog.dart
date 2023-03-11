@@ -32,12 +32,12 @@ class MessageDialog extends ConsumerWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 23.sp, fontFamily: "gunk"),
+            style: TextStyle(fontSize: 23.sp, fontFamily: "Gunk"),
           ).paddingBottom(1.h),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16.sp, fontFamily: "pixel"),
+            style: TextStyle(fontSize: 16.sp, fontFamily: "Pixel"),
           ).paddingSymmetric(vertical: 1.h),
           TextButton(
               style: TextButton.styleFrom(
@@ -49,13 +49,13 @@ class MessageDialog extends ConsumerWidget {
               child: Text(
                 nextText,
                 style: TextStyle(
-                    fontSize: 22.sp, fontFamily: "debug", color: Colors.white),
+                    fontSize: 22.sp, fontFamily: "Debug", color: Colors.white),
               )),
           TextButton(
               onPressed: quitClick,
               child: Text(
                 "I Quit",
-                style: TextStyle(fontSize: 20.sp, fontFamily: "gunk"),
+                style: TextStyle(fontSize: 20.sp, fontFamily: "Gunk"),
               )),
         ],
       ),

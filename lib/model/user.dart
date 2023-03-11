@@ -1,24 +1,45 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+part 'user.g.dart';
+
+@HiveType(typeId: 0)
 class UserModel {
+  @HiveField(0)
   final String username;
+  @HiveField(1)
   final String nickname;
+  @HiveField(2)
   final String email;
+  @HiveField(3)
   final int score;
+  @HiveField(4)
   final int questionsAnswered;
+  @HiveField(5)
   final int questionsCorrect;
+  @HiveField(6)
   final int questionsWrong;
+  @HiveField(7)
   final String sid;
+  @HiveField(8)
   final String fcmToken;
+  @HiveField(9)
   final String? avatar;
+  @HiveField(10)
   final List<String> badges;
+  @HiveField(11)
   final bool isOnline;
+  @HiveField(12)
   final DateTime lastSeen;
+  @HiveField(13)
   final DateTime createdAt;
+  @HiveField(14)
   final String uid;
+  @HiveField(15)
+  final String platform;
   UserModel({
     required this.username,
     required this.nickname,
@@ -35,6 +56,7 @@ class UserModel {
     required this.lastSeen,
     required this.createdAt,
     required this.uid,
+    required this.platform,
   });
 
   UserModel copyWith({
@@ -53,6 +75,7 @@ class UserModel {
     DateTime? lastSeen,
     DateTime? createdAt,
     String? uid,
+    String? platform,
   }) {
     return UserModel(
       username: username ?? this.username,
@@ -70,6 +93,7 @@ class UserModel {
       lastSeen: lastSeen ?? this.lastSeen,
       createdAt: createdAt ?? this.createdAt,
       uid: uid ?? this.uid,
+      platform: platform ?? this.platform,
     );
   }
 
@@ -90,6 +114,7 @@ class UserModel {
       'lastSeen': lastSeen.millisecondsSinceEpoch,
       'createdAt': createdAt.millisecondsSinceEpoch,
       'uid': uid,
+      'platform': platform,
     };
   }
 
@@ -105,11 +130,12 @@ class UserModel {
       sid: map['sid'] as String,
       fcmToken: map['fcmToken'] as String,
       avatar: map['avatar'] != null ? map['avatar'] as String : null,
-      badges: List<String>.from(map['badges'] as List<String>),
+      badges: List<String>.from(map['badges'] as List<dynamic>),
       isOnline: map['isOnline'] as bool,
       lastSeen: DateTime.fromMillisecondsSinceEpoch(map['lastSeen'] as int),
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
       uid: map['uid'] as String,
+      platform: map['platform'] as String,
     );
   }
 
@@ -120,7 +146,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(username: $username, nickname: $nickname, email: $email, score: $score, questionsAnswered: $questionsAnswered, questionsCorrect: $questionsCorrect, questionsWrong: $questionsWrong, sid: $sid, fcmToken: $fcmToken, avatar: $avatar, badges: $badges, isOnline: $isOnline, lastSeen: $lastSeen, createdAt: $createdAt, uid: $uid)';
+    return 'UserModel(username: $username, nickname: $nickname, email: $email, score: $score, questionsAnswered: $questionsAnswered, questionsCorrect: $questionsCorrect, questionsWrong: $questionsWrong, sid: $sid, fcmToken: $fcmToken, avatar: $avatar, badges: $badges, isOnline: $isOnline, lastSeen: $lastSeen, createdAt: $createdAt, uid: $uid, platform: $platform)';
   }
 
   @override
@@ -141,7 +167,8 @@ class UserModel {
         other.isOnline == isOnline &&
         other.lastSeen == lastSeen &&
         other.createdAt == createdAt &&
-        other.uid == uid;
+        other.uid == uid &&
+        other.platform == platform;
   }
 
   @override
@@ -160,6 +187,7 @@ class UserModel {
         isOnline.hashCode ^
         lastSeen.hashCode ^
         createdAt.hashCode ^
-        uid.hashCode;
+        uid.hashCode ^
+        platform.hashCode;
   }
 }

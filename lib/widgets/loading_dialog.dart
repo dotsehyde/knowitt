@@ -25,7 +25,7 @@ class LoadingDialog extends StatelessWidget {
             ).paddingBottom(2.h),
             Text(text,
                 style: TextStyle(
-                    color: Colors.white, fontSize: 20.sp, fontFamily: 'debug')),
+                    color: Colors.white, fontSize: 20.sp, fontFamily: 'Debug')),
           ]),
     );
   }
