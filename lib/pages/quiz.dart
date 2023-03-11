@@ -156,7 +156,6 @@ class _QuizPageState extends ConsumerState<QuizPage>
               });
           break;
         case GameStatus.gameDone:
-          print("Called game done");
           //Call game done func
           Navigator.pushReplacement(
             context,
@@ -209,19 +208,19 @@ class _QuizPageState extends ConsumerState<QuizPage>
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.sp,
-                            fontFamily: 'gunk'),
+                            fontFamily: 'Gunk'),
                       ),
                       Text("Round: 1",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 22.sp,
-                              fontFamily: 'gunk')),
+                              fontFamily: 'Gunk')),
                       Text(
                         "Score: 0",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.sp,
-                            fontFamily: 'gunk'),
+                            fontFamily: 'Gunk'),
                       ),
                     ],
                   ),
@@ -264,7 +263,7 @@ class _QuizPageState extends ConsumerState<QuizPage>
                                     style: TextStyle(
                                         color: t.primaryColor,
                                         fontSize: 18.sp,
-                                        fontFamily: 'gunk'),
+                                        fontFamily: 'Gunk'),
                                   ).paddingSymmetric(
                                       horizontal: 1.5.h, vertical: 1.h),
                                 ),
@@ -281,7 +280,7 @@ class _QuizPageState extends ConsumerState<QuizPage>
                                 style: TextStyle(
                                     color: t.darkBlue,
                                     fontSize: 20.sp,
-                                    fontFamily: 'debug'),
+                                    fontFamily: 'Debug'),
                               ).paddingTop(0.5.h),
                               ListView(
                                 padding: EdgeInsets.zero,
@@ -320,7 +319,7 @@ class _QuizPageState extends ConsumerState<QuizPage>
                                 style: TextStyle(
                                     color: t.primaryColor,
                                     fontSize: 20.sp,
-                                    fontFamily: 'gunk'),
+                                    fontFamily: 'Gunk'),
                               ).paddingBottom(1.h).onTap(() {
                                 gameController.animationController
                                     .stop(canceled: false);
@@ -346,14 +345,14 @@ class _QuizPageState extends ConsumerState<QuizPage>
                                               "Quit Quiz",
                                               style: TextStyle(
                                                   fontSize: 23.sp,
-                                                  fontFamily: "gunk"),
+                                                  fontFamily: "Gunk"),
                                             ).paddingBottom(1.h),
                                             Text(
                                               "Are you sure you want to quit/\n NOTE: An extra 5 points will be deducted if you quit.",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  fontFamily: "pixel"),
+                                                  fontFamily: "Pixel"),
                                             ).paddingSymmetric(vertical: 1.h),
                                             TextButton(
                                                 style: TextButton.styleFrom(
@@ -388,7 +387,7 @@ class _QuizPageState extends ConsumerState<QuizPage>
                                                   "Yes",
                                                   style: TextStyle(
                                                       fontSize: 22.sp,
-                                                      fontFamily: "debug",
+                                                      fontFamily: "Debug",
                                                       color: Colors.white),
                                                 )),
                                             TextButton(
@@ -404,7 +403,7 @@ class _QuizPageState extends ConsumerState<QuizPage>
                                                   "No",
                                                   style: TextStyle(
                                                       fontSize: 20.sp,
-                                                      fontFamily: "gunk"),
+                                                      fontFamily: "Gunk"),
                                                 )),
                                           ],
                                         ),
@@ -447,13 +446,13 @@ class QuestionBox extends ConsumerWidget {
             "What is the first name of my first girlfriend?",
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: t.primaryColor, fontSize: 20.sp, fontFamily: 'gunk'),
+                color: t.primaryColor, fontSize: 20.sp, fontFamily: 'Gunk'),
           ).paddingSymmetric(horizontal: 1.5.h, vertical: 1.h),
           const Spacer(),
           Text(
             "I Give up",
             style: TextStyle(
-                color: t.primaryColor, fontSize: 22.sp, fontFamily: 'gunk'),
+                color: t.primaryColor, fontSize: 22.sp, fontFamily: 'Gunk'),
           ).paddingBottom(1.h),
         ],
       ),

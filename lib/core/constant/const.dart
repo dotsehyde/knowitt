@@ -1,3 +1,11 @@
+import 'package:intl/intl.dart';
+
+import 'package:flutter/foundation.dart';
+
+final isWebMobile = kIsWeb &&
+    (defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android);
+
 const String appName = "Know Itt";
 const String userCollection = "Users";
 const String questionCollection = "Questions";
@@ -23,3 +31,11 @@ const List<String> resultLoadingText = [
   "Calculating your score...",
   "Do you think yo did great?...",
 ];
+
+String count(int value) {
+  return NumberFormat.compact(locale: "en_US").format(value);
+}
+
+String moneyCount(int value) {
+  return NumberFormat("###,###", "en_US").format(value);
+}

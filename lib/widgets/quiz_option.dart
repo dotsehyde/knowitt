@@ -43,7 +43,7 @@ class QuizOption extends ConsumerWidget {
               "${index + 1}. $text",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: 'gunk', color: Colors.white, fontSize: 20.sp),
+                  fontFamily: 'Gunk', color: Colors.white, fontSize: 20.sp),
             ),
           );
         }),
