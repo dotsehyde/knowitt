@@ -18,7 +18,8 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
-    if (FirebaseAuth.instance.currentUser != null) {
+    if ((FirebaseAuth.instance.currentUser != null) &&
+        (FirebaseAuth.instance.currentUser!.emailVerified == false)) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacementNamed("/dashboard");
       });
@@ -43,7 +44,7 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
                 "Login",
                 style: TextStyle(
                     fontSize: 20.sp,
-                    fontFamily: "kwk",
+                    fontFamily: "ugly",
                     fontWeight: FontWeight.bold),
               ).paddingBottom(5.h),
               TextFormField(
@@ -108,7 +109,7 @@ class _AdminAuthPageState extends ConsumerState<AdminAuthPage> {
                       ? CircularProgressIndicator()
                       : Text("Login"))
             ],
-          ),
+          ).paddingSymmetric(horizontal: 10.w),
         ));
       }),
     );

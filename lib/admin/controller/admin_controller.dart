@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knowitt/core/constant/const.dart';
 import 'package:knowitt/model/category.dart';
+import 'package:knowitt/model/question.dart';
 
 enum AdminStatus { initial, waiting, error, done }
 
@@ -17,8 +18,13 @@ class AdminController extends ChangeNotifier {
   String username = '';
   String categoryName = '';
   String selCat = '';
+  String question = '';
+  String correctAnswer = '';
+  int correctPoints = 0;
+  int wrongPoints = 0;
+  int duration = 0;
   List<String> options = [];
-  List<String> listCat = ["Computer Science", "Mathematics", "Physics"];
+  List<String> listCat = [];
   final _auth = FirebaseAuth.instance;
   void setStatus(AdminStatus status) {
     status = status;
@@ -27,11 +33,68 @@ class AdminController extends ChangeNotifier {
 
   final _db = FirebaseFirestore.instance;
 
+//delete question
+  Future<void> deleteQuestion(String id) async {
+    try {
+      await _db.collection(questionCollection).doc(id).delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //delete category
+  Future<void> deleteCategory(String id) async {
+    try {
+      await _db.collection(categoryCollection).doc(id).delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addQuestion() async {
+    try {
+      var id = DateTime.now().millisecondsSinceEpoch.toString();
+      var newQuestion = QuestionModel(
+          createdAt: DateTime.now(),
+          id: id,
+          question: question,
+          answer: correctAnswer,
+          points: correctPoints,
+          wrongPoints: wrongPoints,
+          duration: duration,
+          options: options,
+          category: selCat);
+      _db.collection(questionCollection).doc(id).set(newQuestion.toMap());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+//update question
+  Future<void> updateQuestion(String id) async {
+    try {
+      var newQuestion = QuestionModel(
+          createdAt: DateTime.now(),
+          id: id,
+          question: question,
+          answer: correctAnswer,
+          points: correctPoints,
+          wrongPoints: wrongPoints,
+          duration: duration,
+          options: options,
+          category: selCat);
+      _db.collection(questionCollection).doc(id).update(newQuestion.toMap());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> addCategory() async {
     try {
-      var id = DateTime.now().millisecondsSinceEpoch.toString().substring(0, 7);
-      var newCat = CategoryModel(name: categoryName, id: id);
+      var id = DateTime.now().millisecondsSinceEpoch.toString();
+      var newCat = CategoryModel(name: categoryName.toLowerCase(), id: id);
       _db.collection(categoryCollection).doc(id).set(newCat.toMap());
+      listCat.clear();
     } catch (e) {
       rethrow;
     }
@@ -45,6 +108,7 @@ class AdminController extends ChangeNotifier {
         var cat = CategoryModel.fromMap(element.data());
         list.add(cat.name);
       }
+      listCat.addAll(list);
       return list;
     } catch (e) {
       rethrow;
